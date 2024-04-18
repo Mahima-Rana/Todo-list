@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const app = express();
+require('dotenv').config();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,7 +13,7 @@ mongoose.connection.once("open", () => console.log("Connected with a database"))
   console.log("Your Error", error);
 });
 
-mongoose.connect(MONGODB_URL);
+mongoose.connect(process.env.MONGODB_URL);
 
 const itemsSchema = mongoose.Schema({
   name: String
